@@ -20,6 +20,8 @@ def signup():
             flash('Passwords must be at least 4 characters.', category='error')
         elif password1 != password2:
             flash('Passwords do not match.', category='error')
+        elif len(firstname) < 1 or len(surname) < 1:  # type: ignore
+            flash('Firstname and surname must be at least 1 character.', category='error')
         else:
             if user:
                 flash('An account associated with this email address already exists.', category='error')

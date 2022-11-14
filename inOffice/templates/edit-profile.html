@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h3>Edit Profile</h3>
+    <div class="container-fluid">
+        <img src="./static/profile.png" alt="Profile placeholder" id="profile-placeholder">
+        <form method="POST" style="width: 256px;">
+            <div class="form-group p-2">
+                <input 
+                    type="email" 
+                    class="form-control" 
+                    id="email" 
+                    name="email" 
+                    placeholder="Email" 
+                />
+            </div>
+            <div class="form-group p-2">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="firstname" 
+                    name="firstname" 
+                    placeholder="Firstname" 
+                />
+            </div>
+            <div class="form-group p-2">
+                <input 
+                    type="text" 
+                    class="form-control" 
+                    id="surname" 
+                    name="surname" 
+                    placeholder="Surname" 
+                />
+            </div>
+            <br />
+            <div align="center" class="submit-button">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
