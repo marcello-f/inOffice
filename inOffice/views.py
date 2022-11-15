@@ -1,15 +1,46 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user, logout_user
 from sqlalchemy import update
-from .models import User
+from .models import User, Tracker
 from . import db
 
 views = Blueprint('views', __name__)
 
-@views.route('/')
+@views.route('/', methods=['GET', 'POST'])
 @login_required
 def home():
-    return render_template('home.html', user=current_user)
+    if request.method == 'POST':
+        monday1 = request.form.get('monday1')
+        tuesday1 = request.form.get('tuesday1')
+        wednesday1 = request.form.get('wednesday1')
+        thursday1 = request.form.get('thursday1')
+        friday1 = request.form.get('friday1')
+        monday2 = request.form.get('monday2')
+        tuesday2 = request.form.get('tuesday2')
+        wednesday2 = request.form.get('wednesday2')
+        thursday2 = request.form.get('thursday2')
+        friday2 = request.form.get('friday2')
+
+        check = Tracker.query.filter_by(user_id=current_user.id).count()
+        print(check)
+        if check == 1:
+            Tracker.query.filter_by(user_id=current_user.id).delete()
+            new_data=Tracker(monday1=monday1,tuesday1=tuesday1,wednesday1=wednesday1,thursday1=thursday1,friday1=friday1,
+            monday2=monday2,tuesday2=tuesday2,wednesday2=wednesday2,thursday2=thursday2,friday2=friday2,user_id=current_user.id)
+            db.session.add(new_data)
+            db.session.commit()
+            flash('Your office days have been updated!', category='success')
+            return redirect(url_for('views.home'))
+        else:
+            new_data=Tracker(monday1=monday1,tuesday1=tuesday1,wednesday1=wednesday1,thursday1=thursday1,friday1=friday1,
+            monday2=monday2,tuesday2=tuesday2,wednesday2=wednesday2,thursday2=thursday2,friday2=friday2,user_id=current_user.id)
+            db.session.add(new_data)
+            db.session.commit()
+            flash('Your office days have been updated!', category='success')
+            return redirect(url_for('views.home'))
+
+    data = User.query.all()
+    return render_template('home.html', user=current_user, data=data)
 
 @views.route('/profile')
 @login_required
@@ -49,6 +80,7 @@ def deletion():
         if ticked:
             logout_user()
             User.query.filter_by(id=user_id).delete()
+            Tracker.query.filter_by(user_id=user_id).delete()
             db.session.commit()
             flash('Account has been successfully deleted.', category='success')
             return redirect(url_for('auth.login'))

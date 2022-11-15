@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
-from .models import User
+from .models import User, Tracker
 from . import db
 
 auth = Blueprint('auth', __name__)
@@ -31,6 +31,10 @@ def signup():
                 db.session.add(new_user)
                 db.session.commit()
                 login_user(new_user, remember='True')
+                new_data=Tracker(monday1=None,tuesday1=None,wednesday1=None,thursday1=None,friday1=None,
+                monday2=None,tuesday2=None,wednesday2=None,thursday2=None,friday2=None,user_id=current_user.id)
+                db.session.add(new_data)
+                db.session.commit()
                 flash('Account has been successfully created!', category='success')
                 return redirect(url_for('views.home'))
     return render_template('signup.html', user=current_user)

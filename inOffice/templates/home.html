@@ -3,5 +3,180 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<p>Welcome {{ user.firstname.title() }}!</p>
+<h3>Hello {{ user.firstname.title() }}!</h3>
+<br>
+<div class="container table-responsive">
+    <h5 align="left">People inOffice.</h5>
+    <table class="table table-bordered border-dark">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Day</th>
+            <th scope="col">Monday</th>
+            <th scope="col">Tuesday</th>
+            <th scope="col">Wednesday</th>
+            <th scope="col">Thursday</th>
+            <th scope="col">Friday</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">This week</th>
+            <th>
+                <ul>
+                {% for user in data %}
+                    {% if user.trackers[0].monday1 == 'on' %}
+                        <li>{{ user.firstname }}</li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </th>
+            <th>
+                <ul>
+                    {% for user in data %}
+                        {% if user.trackers[0].tuesday1 == 'on' %}
+                            <li>{{ user.firstname }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </th>
+            <th>
+                <ul>
+                    {% for user in data %}
+                        {% if user.trackers[0].wednesday1 == 'on' %}
+                            <li>{{ user.firstname }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </th>
+            <th>
+                <ul>
+                    {% for user in data %}
+                        {% if user.trackers[0].thursday1 == 'on' %}
+                            <li>{{ user.firstname }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </th>
+            <th>
+                <ul>
+                    {% for user in data %}
+                        {% if user.trackers[0].friday1 == 'on' %}
+                            <li>{{ user.firstname }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </th>
+          </tr>
+          <tr>
+            <th scope="row">Next week</th>
+            <th>
+                <ul>
+                {% for user in data %}
+                    {% if user.trackers[0].monday2 == 'on' %}
+                        <li>{{ user.firstname }}</li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            </th>
+            <th>
+                <ul>
+                    {% for user in data %}
+                        {% if user.trackers[0].tuesday2 == 'on' %}
+                            <li>{{ user.firstname }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </th>
+            <th>
+                <ul>
+                    {% for user in data %}
+                        {% if user.trackers[0].wednesday2 == 'on' %}
+                            <li>{{ user.firstname }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </th>
+            <th>
+                <ul>
+                    {% for user in data %}
+                        {% if user.trackers[0].thursday2 == 'on' %}
+                            <li>{{ user.firstname }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </th>
+            <th>
+                <ul>
+                    {% for user in data %}
+                        {% if user.trackers[0].friday2 == 'on' %}
+                            <li>{{ user.firstname }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </th>
+          </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+<div class="container table-responsive">
+    <h5 align="left">When will you be inOffice?</h5>
+    <form method="POST">
+    <table class="table table-bordered border-dark">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">Day</th>
+            <th scope="col">Monday</th>
+            <th scope="col">Tuesday</th>
+            <th scope="col">Wednesday</th>
+            <th scope="col">Thursday</th>
+            <th scope="col">Friday</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <tr>
+            <th scope="row">This week</th>
+            <th>
+                <input type="checkbox" id="monday1" name="monday1">
+            </th>
+            <th>
+                <input type="checkbox" id="tuesday1" name="tuesday1">
+            </th>
+            <th>
+                <input type="checkbox" id="wednesday1" name="wednesday1">
+            </th>
+            <th>
+                <input type="checkbox" id="thursday1" name="thursday1">
+            </th>
+            <th>
+                <input type="checkbox" id="friday1" name="friday1">
+            </th>
+          </tr>
+          <tr>
+            <th scope="row">Next week</th>
+            <th>
+                <input type="checkbox" id="monday2" name="monday2">
+            </th>
+            <th>
+                <input type="checkbox" id="tuesday2" name="tuesday2">
+            </th>
+            <th>
+                <input type="checkbox" id="wednesday2" name="wednesday2">
+            </th>
+            <th>
+                <input type="checkbox" id="thursday2" name="thursday2">
+            </th>
+            <th>
+                <input type="checkbox" id="friday2" name="friday2">
+            </th>
+          </tr>
+        </tbody>
+        
+    </table>
+    <div align="center" class="submit-button p-4">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    </form>
+</div>
 {% endblock %}
