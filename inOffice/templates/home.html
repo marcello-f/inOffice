@@ -3,7 +3,16 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h3>Hello {{ user.firstname.title() }}!</h3>
+{% if day == '1' or day == '21' %}
+    <h3>Hello {{ user.firstname.title() }}! Today is {{ weekday }} the {{ day }}st of {{ month }}</h3>
+{% elif day == '2' or day == '22' %}
+    <h3>Hello {{ user.firstname.title() }}! Today is {{ weekday }} the {{ day }}nd of {{ month }}</h3>
+{% elif day == '3' or day == '23' %}
+    <h3>Hello {{ user.firstname.title() }}! Today is {{ weekday }} the {{ day }}rd of {{ month }}</h3>
+{% else %}
+    <h3>Hello {{ user.firstname.title() }}! Today is {{ weekday }} the {{ day }}th of {{ month }}</h3>
+{% endif %}
+
 <br>
 <div class="container table-responsive">
     <h5 align="left">People inOffice.</h5>
@@ -11,11 +20,11 @@
         <thead class="table-dark">
           <tr>
             <th scope="col">Day</th>
-            <th scope="col">Monday</th>
-            <th scope="col">Tuesday</th>
-            <th scope="col">Wednesday</th>
-            <th scope="col">Thursday</th>
-            <th scope="col">Friday</th>
+            <th scope="col">Monday - {{ weeks[0] }}</th>
+            <th scope="col">Tuesday - {{ weeks[1] }}</th>
+            <th scope="col">Wednesday - {{ weeks[2] }}</th>
+            <th scope="col">Thursday - {{ weeks[3] }}</th>
+            <th scope="col">Friday - {{ weeks[4] }}</th>
           </tr>
         </thead>
         <tbody>
@@ -126,11 +135,11 @@
         <thead class="table-dark">
           <tr>
             <th scope="col">Day</th>
-            <th scope="col">Monday</th>
-            <th scope="col">Tuesday</th>
-            <th scope="col">Wednesday</th>
-            <th scope="col">Thursday</th>
-            <th scope="col">Friday</th>
+            <th scope="col">Monday - {{ weeks[7] }}</th>
+            <th scope="col">Tuesday - {{ weeks[8] }}</th>
+            <th scope="col">Wednesday - {{ weeks[9] }}</th>
+            <th scope="col">Thursday - {{ weeks[10] }}</th>
+            <th scope="col">Friday - {{ weeks[11] }}</th>
           </tr>
         </thead>
         
