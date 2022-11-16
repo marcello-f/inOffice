@@ -1,0 +1,30 @@
+#test {
+    border-style: solid;
+    border-width: 2px;
+    border-color: green;
+}
+
+ul {
+    list-style-type:disc;
+}
+
+#profile-placeholder {
+    width: 256px;
+    height: 256px;
+    margin: 32px;
+    margin-top: 16px;
+}
+
+#profile-info {
+    white-space: nowrap;
+    display: table; 
+    margin: 0 auto;
+    text-align: left;
+}
+
+#delete-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:5px;
+}

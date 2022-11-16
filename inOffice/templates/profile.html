@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <h3>Profile</h3>
+    <div class="container-fluid">
+        <img src="./static/profile.png" alt="Profile placeholder" id="profile-placeholder">
+        <ul id="profile-info">
+            <li><strong>Firstname:</strong> {{ user.firstname.title() }}</li>
+            <li><strong>Surname:</strong> {{ user.surname.title() }}</li>
+            <li><strong>Email:</strong> {{ user.email }}</li>
+        </ul>
+        <div class="submit-button" style="margin-top: 32px;">
+            <button class="btn btn-primary" onclick="window.location.href='{{ url_for('views.edit_profile') }}';">Edit</button>
+        </div>
+        <div class="submit-button" style="margin-top: 16px;">
+            <button id="delete-button" class="btn btn-danger" onclick="window.location.href='{{ url_for('views.deletion') }}';">
+                <span class="material-symbols-outlined">
+                    delete
+                </span>
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
