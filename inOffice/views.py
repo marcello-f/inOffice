@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user, logout_user
 from sqlalchemy import update
 from .models import User, Tracker
-from datetime import date
+import datetime
 from . import db
 
 views = Blueprint('views', __name__)
@@ -40,39 +40,40 @@ def home():
             flash('Your office days have been updated!', category='success')
             return redirect(url_for('views.home'))
 
-    day = date.today().day
-    month = date.today().strftime("%B")
-    weekday = date.today().strftime('%A')
+    day = datetime.date.today() + datetime.timedelta(days=14) 
+    month = datetime.date.today().strftime("%B")
+    weekday = datetime.date.today().strftime('%A')
     data = User.query.all()
 
     def weeks():
         dates = []
-
+        
         if weekday == 'Monday':
-            dates = [day + i for i in range(14)]
+            dates = [day + datetime.timedelta(days=i) for i in range(14)]
         elif weekday == 'Tuesday':
-            dates = [day + i - 1 for i in range(14)]
+            dates = [day + datetime.timedelta(days=i-1)for i in range(14)]
         elif weekday == 'Wednesday':
-            dates = [day + i - 2 for i in range(14)]
+            dates = [day + datetime.timedelta(days=i-2) for i in range(14)]
         elif weekday == 'Thursday':
-            dates = [day + i - 3 for i in range(14)]
+            dates = [day + datetime.timedelta(days=i-3) for i in range(14)]
         elif weekday == 'Friday':
-            dates = [day + i - 4 for i in range(14)]
+            dates = [day + datetime.timedelta(days=i-4) for i in range(14)]
         elif weekday == 'Saturday':
-            dates = [day + i - 5 for i in range(14)]
+            dates = [day + datetime.timedelta(days=i-5) for i in range(14)]
         elif weekday == 'Sunday':
-            dates = [day + i - 6 for i in range(14)]
+            dates = [day + datetime.timedelta(days=i-6) for i in range(14)]
 
         for i in range(len(dates)):
-                if dates[i] == 1 or dates[i] == 21:
+                if dates[i].day == 1 or dates[i].day == 21 or dates[i].day == 31:
                     dates[i] = str(dates[i]) + 'st'
-                elif dates[i] == 2 or dates[i] == 22:
+                elif dates[i].day == 2 or dates[i].day == 22:
                     dates[i] = str(dates[i]) + 'nd'
-                elif dates[i] == 3 or dates[i] == 23:
+                elif dates[i].day == 3 or dates[i].day == 23:
                     dates[i] = str(dates[i]) + 'rd'
                 else:
                     dates[i] = str(dates[i]) + 'th'
         return dates
+
     return render_template('home.html', user=current_user, data=data, day=day, month=month, weekday=weekday, weeks=weeks())
 
 @views.route('/profile')

@@ -8,8 +8,8 @@
     <div class="container-fluid">
         <img src="./static/profile.png" alt="Profile placeholder" id="profile-placeholder">
         <ul id="profile-info">
-            <li><strong>Firstname:</strong> {{ user.firstname }}</li>
-            <li><strong>Surname:</strong> {{ user.surname }}</li>
+            <li><strong>Firstname:</strong> {{ user.firstname.title() }}</li>
+            <li><strong>Surname:</strong> {{ user.surname.title() }}</li>
             <li><strong>Email:</strong> {{ user.email }}</li>
         </ul>
         <div class="submit-button" style="margin-top: 32px;">
