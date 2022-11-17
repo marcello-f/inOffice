@@ -3,11 +3,11 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% if day.day == '1' or day.day == '21' or day.day == '31' %}
+{% if day.day == 1 or day.day == 21 or day.day == 31 %}
     <h3>Hello {{ user.firstname.title() }}! Today is {{ weekday }} the {{ day.day }}st of {{ month }}</h3>
-{% elif day.day == '2' or day.day == '22' %}
+{% elif day.day == 2 or day.day == 22 %}
     <h3>Hello {{ user.firstname.title() }}! Today is {{ weekday }} the {{ day.day }}nd of {{ month }}</h3>
-{% elif day.day == '3' or day.day == '23' %}
+{% elif day.day == 3 or day.day == 23 %}
     <h3>Hello {{ user.firstname.title() }}! Today is {{ weekday }} the {{ day.day }}rd of {{ month }}</h3>
 {% else %}
     <h3>Hello {{ user.firstname.title() }}! Today is {{ weekday }} the {{ day.day }}th of {{ month }}</h3>
