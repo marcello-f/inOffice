@@ -40,7 +40,7 @@ def home():
             flash('Your office days have been updated!', category='success')
             return redirect(url_for('views.home'))
 
-    day = datetime.date.today() + datetime.timedelta(days=14) 
+    day = datetime.date.today()
     month = datetime.date.today().strftime("%B")
     weekday = datetime.date.today().strftime('%A')
     data = User.query.all()
